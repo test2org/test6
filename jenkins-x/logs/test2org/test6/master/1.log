@@ -1,0 +1,65 @@
+
+Showing logs for build [32mmeta-test2org-test6-master-1[0m stage [32mmeta-pipeline[0m and container [32mstep-credential-initializer-l9zc2[0m
+{"level":"warn","ts":1567879303.9730926,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1567879303.9740357,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mmeta-test2org-test6-master-1[0m stage [32mmeta-pipeline[0m and container [32mstep-working-dir-initializer-sjw8h[0m
+{"level":"warn","ts":1567879304.7517304,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1567879304.757926,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"mkdir -p /workspace/source\""}
+
+Showing logs for build [32mmeta-test2org-test6-master-1[0m stage [32mmeta-pipeline[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mmeta-test2org-test6-master-1[0m stage [32mmeta-pipeline[0m and container [32mstep-git-source-meta-test2org-test6-master-xxb6z[0m
+{"level":"warn","ts":1567879311.8396068,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1567879312.0781696,"logger":"fallback-logger","caller":"git/git.go:102","msg":"Successfully cloned https://github.com/test2org/test6.git @ e26121265a854d806330be0d6ecdd203be8ca52a in path /workspace/source"}
+
+Showing logs for build [32mmeta-test2org-test6-master-1[0m stage [32mmeta-pipeline[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:e26121265a854d806330be0d6ecdd203be8ca52a
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mmeta-test2org-test6-master-1[0m stage [32mmeta-pipeline[0m and container [32mstep-merge-pull-refs[0m
+SKIP merge-pull-refs: Nothing to merge
+
+Showing logs for build [32mmeta-test2org-test6-master-1[0m stage [32mmeta-pipeline[0m and container [32mstep-create-effective-pipeline[0m
+Deleting and cloning the Jenkins X versions repo
+Cloning the Jenkins X versions repo https://github.com/jenkins-x/jenkins-x-versions.git with ref refs/heads/master to /builder/home/.**/jenkins-x-versions
+Effective pipeline written to jenkins-x-effective.yml
+
+Showing logs for build [32mmeta-test2org-test6-master-1[0m stage [32mmeta-pipeline[0m and container [32mstep-create-tekton-crds[0m
+running command: echo \$(**-release-version) > VERSION
+
+running command: mvn versions:set -DnewVersion=\$(cat VERSION)
+Picked up _JAVA_OPTIONS: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Xms10m -Xmx192m
+OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase from one, then you should configure the number of parallel GC threads appropriately using -XX:ParallelGCThreads=N
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< com.ey.test:test6 >--------------------------
+[INFO] Building demo 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- versions-maven-plugin:2.7:set (default-cli) @ test6 ---
+[INFO] Searching for local aggregator root...
+[INFO] Local aggregation root: /workspace/source
+[INFO] Processing change of com.ey.test:test6:0.0.1-SNAPSHOT -> 0.0.1
+[INFO] Processing com.ey.test:test6
+[INFO]     Updating project com.ey.test:test6
+[INFO]         from version 0.0.1-SNAPSHOT to 0.0.1
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.063 s
+[INFO] Finished at: 2019-09-07T18:02:12Z
+[INFO] ------------------------------------------------------------------------
+
+running command: ** step tag --version \$(cat VERSION)
+Updating chart version in charts/test6/Chart.yaml to 0.0.1
+Updating repository in charts/test6/values.yaml to 10.0.48.131:5000/test2org/test6
+Updating tag in charts/test6/values.yaml to 0.0.1
+error: Have you set up a git credential helper? See https://help.github.com/articles/caching-your-github-password-in-git/
+: git output: remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/test2org/test6.git/': failed to run 'git push origin v0.0.1' command in directory '', output: 'remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/test2org/test6.git/''
+error: failed to set the version on release pipelines: failed to run '/bin/sh -c ** step tag --version $(cat VERSION)' command in directory '/workspace/source', output: ''
+[31m
+Pipeline failed on stage 'meta-pipeline' : container 'step-create-tekton-crds'. The execution of the pipeline has stopped.[0m
